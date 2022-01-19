@@ -10,35 +10,43 @@ contract Erc1155 is ERC1155 {
 
     constructor() ERC1155("https://raw.githubusercontent.com/subakjusu/SampleERC1155/master/token/{id}.json") {}
 
-    function mint(uint256 tokenId, uint256 amount) public {
+    function mintCaller(uint256 tokenId, uint256 amount) public {
         _mint(msg.sender, tokenId, amount, "");
     }
 
-    function mint(uint256 tokenId, uint256 amount, address owner) public {
+    function mintOwner(uint256 tokenId, uint256 amount, address owner) public {
         _mint(owner, tokenId, amount, "");
     }
 
-    function mintBatch(uint256[] memory tokenIds, uint256[] memory amounts) public {
+    function mintOwnerWithData(uint256 tokenId, uint256 amount, address owner, bytes memory data) public {
+        _mint(owner, tokenId, amount, data);
+    }
+
+    function mintSelfBatch(uint256[] memory tokenIds, uint256[] memory amounts) public {
         _mintBatch(msg.sender, tokenIds, amounts, "");
     }
 
-    function mintBatch(uint256[] memory tokenIds, uint256[] memory amounts, address owner) public {
+    function mintOwnerBatch(uint256[] memory tokenIds, uint256[] memory amounts, address owner) public {
         _mintBatch(owner, tokenIds, amounts, "");
     }
 
-    function burn(uint256 tokenId, uint256 amount) public {
+    function mintOwnerWithDataBatch(uint256[] memory tokenIds, uint256[] memory amounts, address owner, bytes memory data) public {
+        _mintBatch(owner, tokenIds, amounts, data);
+    }
+
+    function burnCaller(uint256 tokenId, uint256 amount) public {
         _burn(msg.sender, tokenId, amount);
     }
 
-    function burn(uint256 tokenId, uint256 amount, address owner) public {
+    function burnOwner(uint256 tokenId, uint256 amount, address owner) public {
         _burn(owner, tokenId, amount);
     }
 
-    function burnBatch(uint256[] memory tokenIds, uint256[] memory amounts) public {
+    function burnCallerBatch(uint256[] memory tokenIds, uint256[] memory amounts) public {
         _burnBatch(msg.sender, tokenIds, amounts);
     }
 
-    function burnBatch(uint256[] memory tokenIds, uint256[] memory amounts, address owner) public {
+    function burnOwnerBatch(uint256[] memory tokenIds, uint256[] memory amounts, address owner) public {
         _burnBatch(owner, tokenIds, amounts);
     }
 }
